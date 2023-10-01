@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
 
 
 class Blog(models.Model):
@@ -8,7 +9,7 @@ class Blog(models.Model):
     blog_time = models.TimeField(null=True)
     title = models.CharField(max_length=64)
     content = models.TextField(max_length=4000)
-    image = models.ImageField(null=True, blank=True)
+    image = CloudinaryField('image', default='placeholder')
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     slug = models.SlugField(max_length=50, unique=True, null=False)
 
