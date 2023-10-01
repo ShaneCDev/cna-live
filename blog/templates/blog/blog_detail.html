@@ -28,7 +28,7 @@
                     </div>
                     <div class="card-subtitle mb-2 text-muted text-center">By: {{ blog.author }}</div>
                     {% for paragraph in content_paragraphs %}
-                        <p class="text-dark text-break fw-normal lh-1">{{ blog.content | safe }}</p>
+                        <p class="text-dark text-break fw-normal lh-1">{{ paragraph | safe }}</p>
                     {% endfor %}
                 </div>
             </div>
