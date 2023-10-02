@@ -1,5 +1,5 @@
 :root {
-    --main-color: #1a1a1a;
+    --main-color: #000;
     --secondary-color: #fff;
     --tertiary-color: #40ff29;
 }
@@ -20,12 +20,15 @@ body {
 }
 
 .logo {
-    background: url('/media/stackedcolor_50.png') no-repeat center fixed;
     height: 75%;
 }
 
 .tertiary-color {
     color: var(--tertiary-color);
+}
+
+.spacer {
+    margin-top: 2.5rem;
 }
 
 .icon {
