@@ -11,7 +11,7 @@ class Blog(models.Model):
     content = models.TextField(max_length=4000)
     image = CloudinaryField('image', default='placeholder')
     image_url = models.URLField(max_length=1024, null=True, blank=True)
-    slug = models.SlugField(max_length=50, unique=True, null=False)
+    slug = models.SlugField(max_length=100, unique=True, null=False)
 
     class Meta:
         ordering = ['-blog_date', '-blog_time']
