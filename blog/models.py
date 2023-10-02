@@ -7,7 +7,7 @@ class Blog(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     blog_date = models.DateField(auto_now_add=True, null=True)
     blog_time = models.TimeField(null=True)
-    title = models.CharField(max_length=64)
+    title = models.CharField(max_length=100)
     content = models.TextField(max_length=4000)
     image = CloudinaryField('image', default='placeholder')
     image_url = models.URLField(max_length=1024, null=True, blank=True)
