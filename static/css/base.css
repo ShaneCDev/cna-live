@@ -10,6 +10,8 @@ html {
 
 body {
     height: calc(100vh - 164px);
+    background: url('/static/img/background.png') no-repeat center center fixed;
+    background-size: cover;
     color: var(--secondary-color);
     font-family: 'Lato';
     overflow-y: scroll;

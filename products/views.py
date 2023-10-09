@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.contrib.auth.decorators import login_required
 from django.utils.text import slugify
+from django.template.defaultfilters import linebreaksbr
 from .models import Category, Product
 from .forms import ProductForm, CategoryForm
 from django.db.models import Q
@@ -61,9 +62,14 @@ def all_products(request):
 def product_detail(request, slug):
     """Detailed view of the product"""
     product = get_object_or_404(Product, slug=slug)
+    paragraphs = linebreaksbr(product.description).split('<br>')
+
+    paragraphs = [p.strip() for p in paragraphs if p.strip()]
+
 
     context = {
         'product': product,
+        'paragraphs': paragraphs,
     }
 
     return render(request, 'products/product_detail.html', context)
