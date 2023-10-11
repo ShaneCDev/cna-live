@@ -57,6 +57,19 @@ def checkout(request):
             pid = request.POST.get('client_secret').split('_secret')[0]
             order.stripe_pid = pid
             order.original_bag = json.dumps(bag)
+
+            discount_applied = False
+            discount_amount = 0.0
+
+            for item_id, item_data in bag.items():
+                if item_data > 4:
+                    discount_applied = True
+                    discount_amount = 10.00
+                    break
+            
+            order.discount_applied = discount_applied
+            order.discount_amount = discount_amount
+
             order.save()
             for item_id, item_data in bag.items():
                 try:
