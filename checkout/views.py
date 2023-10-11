@@ -141,6 +141,12 @@ def checkout(request):
         'client_secret': intent.client_secret,
     }
 
+    print('Request:', request)
+
+    print('Context:', context)
+
+    print('Bag:', bag)
+
     return render(request, template, context)
 
 

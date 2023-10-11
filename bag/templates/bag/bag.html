@@ -42,7 +42,7 @@
                                         {% if item.product.image %}
                                             <img class="img-fluid rounded" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
                                         {% else %}
-                                            <img src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}" class="img-fluid rounded">
+                                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="img-fluid rounded">
                                         {% endif %}
                                     </td>
                                     <td class="py-3">
@@ -83,14 +83,20 @@
                                         <a class="remove-item text-danger float-end" id="remove_{{ item.item_id }}"><small>Remove</small></a>
                                     </td>
                                     <td class="py-3">
-                                        <p class="my-0">{{ item.product.price | calc_subtotal:item.quantity }}</p>
+                                        <p class="my-0">{{ item.product.price|calc_subtotal:item.quantity }}</p>
                                     </td>
                                 </tr>
                             {% endfor %}
                             <tr>
                                 <td colspan="5" class="pt-5 text-end">
-                                    <h6><strong>Bag Total: €{{ total|floatformat:2 }}</strong></h6>
-                                    <h6>Delivery: €{{ delivery|floatformat:2 }}</h6>
+                                    {% if discount_applied %}
+                                        <h6><strong>Bag Total: €{{ total|floatformat:2 }}</strong></h6>
+                                        <h6>Delivery: €{{ delivery|floatformat:2 }}</h6>
+                                        <h6>Discount: -€{{ discount_amount|floatformat:2 }}</h6>
+                                    {% else %}
+                                        <h6><strong>Bag Total: €{{ total|floatformat:2 }}</strong></h6>
+                                        <h6>Delivery: €{{ delivery|floatformat:2 }}</h6>
+                                    {% endif %}
                                     <h4 class="mt-4"><strong>Grand Total: €{{ grand_total|floatformat:2 }}</strong></h4>
                                 </td>
                             </tr>

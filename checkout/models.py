@@ -47,10 +47,25 @@ class Order(models.Model):
         """
         Update the grand total each time a new item is added to the order
         """
+        # if self.discount_applied:
+        #     self.order_total = self.lineitems.aggregate(Sum('lineitem_total'))['lineitem_total__sum'] - self.discount_amount or 0
+        #     self.delivery_cost = self.order_total * settings.STANDARD_DELIVERY_PERCENTAGE / 100
+        #     self.grand_total = self.order_total + self.delivery_cost
+        # else:
+        #     self.order_total = self.lineitems.aggregate(Sum('lineitem_total'))['lineitem_total__sum'] or 0
+        #     self.delivery_cost = self.order_total * settings.STANDARD_DELIVERY_PERCENTAGE / 100
+        #     self.grand_total = self.order_total + self.delivery_cost
         self.order_total = self.lineitems.aggregate(Sum('lineitem_total'))['lineitem_total__sum'] or 0
         self.delivery_cost = self.order_total * settings.STANDARD_DELIVERY_PERCENTAGE / 100
         self.grand_total = self.order_total + self.delivery_cost
         self.save()
+
+    # def apply_discount(self):
+    #     """
+    #     Apply discount to order if quantity of item > 4
+    #     """
+    #     if self.discount_applied:
+    #         self.discount_amount
 
     def save(self, *args, **kwargs):
         """

@@ -1,3 +1,4 @@
+{% load static %}
 <div class="toast custom-toast rounded-0 border-top-0 fade" data-bs-autohide="true" data-bs-delay="5000" data-bs-animation="true">
     <div class="arrow-up arrow-success"></div>
     <div class="w-100 toast-capper bg-success"></div>
@@ -21,7 +22,7 @@
                             {% if item.product.image %}
                                 <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="w-100">
                             {% else %}
-                                <img src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}" class="w-100">
+                                <img src="{% static 'img/noimage.png' %}" alt="{{ item.product.name }}" class="w-100">
                             {% endif %}
                         </div>
                         <div class="col-9">
