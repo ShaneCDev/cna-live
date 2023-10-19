@@ -18,11 +18,9 @@
             <div class="dropdown-menu border-0 dropend" aria-labelledby="all-products-link">
                 <button class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">By Category</button>
                 <ul class="dropdown-menu">
-                    <li><a href="{% url 'products' %}?category=Concentrates" class="dropdown-item">Concentrates</a></li>
-                    <li><a href="{% url 'products' %}?category=Hardware and Batterys" class="dropdown-item">Hardware and Batterys</a></li>
-                    <li><a href="{% url 'products' %}?category=HHC-O" class="dropdown-item">HHC-O</a></li>
-                    <li><a href="{% url 'products' %}?category=HHC" class="dropdown-item">HHC</a></li>
-                    <li><a href="{% url 'products' %}?category=CBD" class="dropdown-item">CBD</a></li>
+                    {% for c in categories %}
+                    <li><a href="{% url 'products' %}?category={{ c.name }}" class="dropdown-item">{{ c.friendly_name }}</a></li>
+                    {% endfor %}
                 </ul>
                 <a href="{% url 'products' %}" class="dropdown-item">All Products</a>
             </div>
