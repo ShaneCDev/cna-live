@@ -33,7 +33,6 @@ def bag_contents(request):
     delivery = total * Decimal(settings.STANDARD_DELIVERY_PERCENTAGE / 100)
 
     if discount_applied:
-        # total_after_discount = total - discount_amount
         grand_total = (delivery + total) - discount_amount
 
         context = {
@@ -55,7 +54,5 @@ def bag_contents(request):
             'delivery': delivery,
             'grand_total': grand_total,
         }
-
-    print(context)
 
     return context

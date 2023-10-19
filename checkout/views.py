@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpR
 from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.conf import settings
+from django.template.loader import render_to_string
+from django.core.mail import send_mail
 
 import stripe
 
@@ -33,9 +35,6 @@ def cache_checkout_data(request):
 
 
 def checkout(request):
-    stripe_public_key = settings.STRIPE_PUBLIC_KEY
-    stripe_secret_key = settings.STRIPE_SECRET_KEY
-
     if request.method == 'POST':
         bag = request.session.get('bag', {})
 
@@ -54,8 +53,8 @@ def checkout(request):
         order_form = OrderForm(form_data)
         if order_form.is_valid():
             order = order_form.save(commit=False)
-            pid = request.POST.get('client_secret').split('_secret')[0]
-            order.stripe_pid = pid
+            # pid = request.POST.get('client_secret').split('_secret')[0]
+            # order.stripe_pid = pid
             order.original_bag = json.dumps(bag)
 
             discount_applied = False
@@ -103,12 +102,7 @@ def checkout(request):
 
         current_bag = bag_contents(request)
         total = current_bag['grand_total']
-        stripe_total = round(total * 100)
-        stripe.api_key = stripe_secret_key
-        intent = stripe.PaymentIntent.create(
-            amount=stripe_total,
-            currency=settings.STRIPE_CURRENCY,
-        )
+        # stripe_total = round(total * 100)
 
         # Attempt to prepopulate the form with user profile data
         if request.user.is_authenticated:
@@ -130,22 +124,14 @@ def checkout(request):
         else:
             order_form = OrderForm()
 
-    if not stripe_public_key:
-        messages.warning(request, 'Stripe public key is missing. \
-                         Did you forget to set it in the environment?')
+    # if not stripe_public_key:
+    #     messages.warning(request, 'Stripe public key is missing. \
+    #                      Did you forget to set it in the environment?')
 
     template = 'checkout/checkout.html'
     context = {
         'order_form': order_form,
-        'stripe_public_key': stripe_public_key,
-        'client_secret': intent.client_secret,
     }
-
-    print('Request:', request)
-
-    print('Context:', context)
-
-    print('Bag:', bag)
 
     return render(request, template, context)
 
@@ -154,6 +140,28 @@ def checkout_success(request, order_number):
     """Handle successful checkouts"""
     save_info = request.session.get('save_info')
     order = get_object_or_404(Order, order_number=order_number)
+
+    cust_email = order.email
+    subject = render_to_string(
+        'checkout/confirmation_emails/confirmation_email_subject.txt',
+        {'order': order})
+    body = render_to_string(
+        'checkout/confirmation_emails/confirmation_email_body.txt',
+        {'order': order, 'contact_email': settings.DEFAULT_FROM_EMAIL})
+    
+    send_mail(
+        subject,
+        body,
+        settings.DEFAULT_FROM_EMAIL,
+        [cust_email]
+    )
+
+    print(send_mail(
+        subject,
+        body,
+        settings.DEFAULT_FROM_EMAIL,
+        [cust_email]
+    ))
 
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)
