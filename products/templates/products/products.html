@@ -74,10 +74,15 @@
                                                 <a href="{% url 'products' %}?category={{ product.category.name }}" class="text-muted">
                                                     <i class="fas fa-tag me-1"></i> <span class="text-light">{{ product.category.friendly_name }}</span>
                                                 </a>
+                                                {% if request.user.is_superuser %}
+                                                    <small class="ms-3">
+                                                        <a href="{% url 'edit_category' id=product.category.id %} ">Edit Category</a>
+                                                    </small>
+                                                {% endif %}
                                             </p>
                                             {% endif %}
                                             {% if request.user.is_superuser %}
-                                                <small class="ml-3">
+                                                <small class="ms-3">
                                                     <a href="{% url 'edit_product' product.slug product.id %}">Edit</a> |
                                                     <a href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#modal-{{ product.id }}">Delete</button>
                                                 </small>

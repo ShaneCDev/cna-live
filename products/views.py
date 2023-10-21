@@ -159,6 +159,35 @@ def edit_product(request, slug, product_id):
 
 
 @login_required
+def edit_category(request, id):
+    """edit product categories"""
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry only store owners can do that.')
+        return redirect(reverse('home'))
+
+    category = get_object_or_404(Category, pk=id)
+    if request.method == 'POST':
+        form = CategoryForm(request.POST, instance=category)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Category edited successfully.')
+            return redirect(reverse('products'))
+        else:
+            messages.error(request, 'Failed to edit category. Please ensure the form is valid.')
+    else:
+        form = CategoryForm(instance=category)
+        messages.info(request, f'You are editing { category.friendly_name }')
+    
+    template = 'products/edit_category.html'
+    context = {
+        'form': form,
+        'category': category
+    }
+
+    return render(request, template, context)
+
+
+@login_required
 def delete_product(request, id):
     """delete products from the store"""
     if not request.user.is_superuser:
