@@ -17,9 +17,31 @@
             <div class="col-12 col-md-6 col-lg-4 offset-lg-2">
                 <div class="image-container my-5 h-75">
                     {% if product.image %}
-                        <a href="{{ product.image.url }}" target="_blank">
+                        <!-- <a href="{{ product.image.url }}" target="_blank">
                             <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img-top img-fluid">
-                        </a>
+                        </a> -->
+                        <div id="carouselExampleIndicators" class="carousel slide card-img-top img-fluid" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            </div>
+                            <div class="carousel-inner">
+                                {% for images in image_urls %}
+                              <div class="carousel-item {% if forloop.first %} active {% endif %}">
+                                <img src="{{ images }}" class="w-100" alt="{{ product.name }}">
+                              </div>
+                                {% endfor %}
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Next</span>
+                            </button>
+                          </div>
+                        </div>
                     {% else %}
                         <a href="">
                             <img src="{% static 'img/noimage.png' %}" alt="{{ product.name }}" class="card-img-top img-fluid">

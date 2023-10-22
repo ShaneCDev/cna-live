@@ -66,9 +66,13 @@ def product_detail(request, slug):
 
     paragraphs = [p.strip() for p in paragraphs if p.strip()]
 
+    image_urls = [product.image.url, product.image2.url, product.image3.url]
+
+    print('Image URLs:', image_urls)
 
     context = {
         'product': product,
+        'image_urls': image_urls,
         'paragraphs': paragraphs,
     }
 
@@ -87,6 +91,8 @@ def add_product(request):
         if form.is_valid():
             product = form.save(commit=False)
             product.slug = slugify(product.name)
+            print(Product)
+            print('Post request:', request.POST)
             product.save()
             messages.success(request, 'Successfully added product!')
             return redirect(reverse('product_detail', kwargs={'slug': product.slug}))
@@ -95,6 +101,8 @@ def add_product(request):
     else:
         form = ProductForm()
 
+    print(Product)
+    print('Post request:', request.POST)
     template = 'products/add_product.html'
     context = {
         'form': form,
@@ -140,6 +148,10 @@ def edit_product(request, slug, product_id):
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES, instance=product)
         if form.is_valid():
+            print(product.image)
+            print(product.image2)
+            print(product.image3)
+            print('Post request:', request.POST)
             form.save()
             messages.success(request, 'Product edited successfully.')
             return redirect(reverse('product_detail', args=[slug]))
@@ -154,7 +166,7 @@ def edit_product(request, slug, product_id):
         'form': form,
         'product': product,
     }
-
+    
     return render(request, template, context)
 
 

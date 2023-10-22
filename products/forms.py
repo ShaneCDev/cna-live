@@ -8,9 +8,11 @@ class ProductForm(forms.ModelForm):
 
     class Meta:
         model = Product
-        fields = ['category', 'name', 'description', 'price', 'image']
+        fields = ['category', 'name', 'description', 'price', 'image', 'second_image', 'third_image']
 
     image = forms.ImageField(label='image', required=False, widget=CustomClearableFileInput)
+    second_image = forms.ImageField(label='image2', required=False, widget=CustomClearableFileInput)
+    third_image = forms.ImageField(label='image3', required=False, widget=CustomClearableFileInput)
 
     def clean(self):
         cleaned_data = super().clean()

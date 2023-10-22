@@ -23,6 +23,8 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     image = CloudinaryField('image', default='placeholder')
+    image2 = CloudinaryField('image', default='placeholder')
+    image3 = CloudinaryField('image', default='placeholder')
     slug = models.SlugField(max_length=256, unique=True, null=False)
 
     def __str__(self):
