@@ -76,7 +76,8 @@
                                                 </a>
                                                 {% if request.user.is_superuser %}
                                                     <small class="ms-3">
-                                                        <a href="{% url 'edit_category' id=product.category.id %} ">Edit Category</a>
+                                                        <a href="{% url 'edit_category' id=product.category.id %} ">Edit Category</a> |
+                                                        <a href="{% url 'delete_category' id=product.category.id %}" class="text-danger">Delete Category</a>
                                                     </small>
                                                 {% endif %}
                                             </p>

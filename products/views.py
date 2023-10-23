@@ -201,3 +201,15 @@ def delete_product(request, id):
     product.delete()
     messages.success(request, f'{ product.name } deleted.')
     return redirect(reverse('products'))
+
+
+def delete_category(request, id):
+    """delete categories from the store"""
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry only store owners can do that.')
+        return redirect(reverse('home'))
+    
+    category = get_object_or_404(Category, id=id)
+    category.delete()
+    messages.success(request, f'{category.friendly_name} deleted.')
+    return redirect(reverse('products'))
