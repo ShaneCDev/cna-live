@@ -42,7 +42,6 @@ class Order(models.Model):
         """
         return uuid.uuid4().hex.upper()[:6]
 
-
     def update_total(self):
         """
         Update the grand total each time a new item is added to the order
