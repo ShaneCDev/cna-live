@@ -40,6 +40,7 @@ ALLOWED_HOSTS = ['127.0.0.1', 'cnaireland.com', 'cna-ireland-c498f99b12b3.heroku
 
 # Application definition
 
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
