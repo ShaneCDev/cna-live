@@ -25,19 +25,6 @@ def bag_contents(request):
                 'product': product,
             })
 
-            print('Product:', type(product.category.name))
-            
-            print('Item Data:', item_data)
-
-            all_categories = Category.objects.all()
-
-            print('All Categories:', all_categories)
-            print('List of all categories:', list(all_categories))
-            # if product.category.name == 'hhc-carts':
-            #     if item_data >= 4:
-            #         discount_applied = True
-            #         discount_amount = 20
-
             discount = 0
 
             match product.category.name:
@@ -114,15 +101,9 @@ def bag_contents(request):
             discount_amount += discount
     delivery = total * Decimal(settings.STANDARD_DELIVERY_PERCENTAGE / 100)
 
-    print('Discount applied:', discount_applied)
-
     if discount_applied:
-        print('Bag:', bag)
-        print('Bag Items:', bag_items)
         grand_total = (delivery + total) - discount_amount
-        #total_after_discount += discount_amount
-        print('Grand total before delivery charge inside discount applied statement:', grand_total)
-        print('Total After Discount (should be 90):', discount_amount)
+        discounted_price = total - discount_amount
         context = {
             'bag_items': bag_items,
             'total': total,
@@ -130,6 +111,7 @@ def bag_contents(request):
             'delivery': delivery,
             'grand_total': grand_total,
             'discount_applied': discount_applied,
+            'discounted_price': discounted_price,
             'total_after_discount': total_after_discount,
             'discount_amount': discount_amount,
         }
