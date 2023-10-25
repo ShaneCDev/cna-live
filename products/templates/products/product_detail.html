@@ -17,9 +17,6 @@
             <div class="col-12 col-md-6 col-lg-4 offset-lg-2">
                 <div class="image-container my-5 h-75">
                     {% if product.image %}
-                        <!-- <a href="{{ product.image.url }}" target="_blank">
-                            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img-top img-fluid">
-                        </a> -->
                         <div id="carouselExampleIndicators" class="carousel slide card-img-top img-fluid" data-bs-ride="carousel">
                             <div class="carousel-indicators">
                               <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -78,23 +75,74 @@
                                 <p class="mt-3"><strong class="text-dark">Quantity:</strong></p>
                                 <div class="form-group w-50">
                                     <div class="input-group input-group-{{ product.id }}">
-                                        <div class="input-group-prepend">
-                                            <button class="decrement-qty btn btn-dark rounded-0 decrement-qty_{{ product.id }}" data-item_id="{{ product.id }}">
-                                                <span class="icon">
-                                                    <i class="fas fa-minus text-light"></i>
-                                                </span>
-                                            </button>
+                                        {% if product.category.name == 'hhc-carts' %}
+                                        <select class="form-control id_qty_{{ product.id }}" name="quantity" data-item_id="{{ product.id }}">
+                                            <option value="1">1 - €29.99</option>
+                                            <option value="4">4 - €99.99</option>
+                                            <option value="10">10 - €199.99</option>
+                                            <option value="25">25 - €449.99</option>
+                                            <option value="50">50 - €799.99</option>
+                                        </select>
+                                        {% elif product.category.name == 'hhc-disposables' %}
+                                        <select class="form-control id_qty_{{ product.id }}" name="quantity" data-item_id="{{ product.id }}">
+                                            <option value="1">1 - €40.00</option>
+                                            <option value="4">4 - €120.00</option>
+                                            <option value="10">10 - €250.00</option>
+                                            <option value="25">25 - €550.00</option>
+                                            <option value="50">50 - €1050.00</option>
+                                        </select>
+                                        {% elif product.category.name == 'concentrates-shatter' %}
+                                        <select class="form-control id_qty_{{ product.id }}" name="quantity" data-item_id="{{ product.id }}">
+                                            <option value="1">1g - €40.00</option>
+                                            <option value="4">4g - €120.00</option>
+                                            <option value="10">10g - €250.00</option>
+                                            <option value="25">25g - €550.00</option>
+                                            <option value="50">50g - €1050.00</option>
+                                        </select>
+                                        {% elif product.category.name == 'concentrates-distillate' %}
+                                        <select class="form-control id_qty_{{ product.id }}" name="quantity" data-item_id="{{ product.id }}">
+                                            <option value="1">25ml - €250.00</option>
+                                            <option value="4">50ml - €450.00</option>
+                                            <option value="10">100ml - €750.00</option>
+                                            <option value="25">250ml - €1400.00</option>
+                                            <option value="50">500ml - €2500.00</option>
+                                            <option value="1000">1000ml - €4500.00</option>
+                                        </select>
+                                        {% elif product.category.name == 'hhc-o-carts' %}
+                                        <select class="form-control id_qty_{{ product.id }}" name="quantity" data-item_id="{{ product.id }}">
+                                            <option value="1">1 - €25.00</option>
+                                            <option value="4">5 - €100.00</option>
+                                            <option value="10">10 - €180.00</option>
+                                        </select>
+                                        {% elif product.category.name == 'hhc-o-disposables' %}
+                                        <select class="form-control id_qty_{{ product.id }}" name="quantity" data-item_id="{{ product.id }}">
+                                            <option value="1">1 - €35.00</option>
+                                            <option value="4">5 - €120.00</option>
+                                            <option value="10">10 - €220.00</option>
+                                        </select>
+                                        {% else %}
+                                        <div class="form-group w-50">
+                                            <div class="input-group input-group-{{ product.id }}">
+                                                <div class="input-group-prepend">
+                                                    <button class="decrement-qty btn btn-dark rounded-0 decrement-qty_{{ product.id }}" data-item_id="{{ product.id }}">
+                                                        <span class="icon">
+                                                            <i class="fas fa-minus text-light"></i>
+                                                        </span>
+                                                    </button>
+                                                </div>
+                                                <input type="number" class="form-control qty_input id_qty_{{ product.id }}" 
+                                                    name="quantity" value="1" min="1" max="99"
+                                                    data-item_id="{{ product.id }}">
+                                                <div class="input-group-append">
+                                                    <button class="increment-qty btn btn-dark rounded-0 increment-qty_{{ product.id }}" data-item_id="{{ product.id }}">
+                                                        <span class="icon">
+                                                            <i class="fas fa-plus text-light"></i>
+                                                        </span>
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <input type="number" class="form-control qty_input id_qty_{{ product.id }}" 
-                                            name="quantity" value="1" min="1" max="99"
-                                            data-item_id="{{ product.id }}">
-                                        <div class="input-group-append">
-                                            <button class="increment-qty btn btn-dark rounded-0 increment-qty_{{ product.id }}" data-item_id="{{ product.id }}">
-                                                <span class="icon">
-                                                    <i class="fas fa-plus text-light"></i>
-                                                </span>
-                                            </button>
-                                        </div>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
