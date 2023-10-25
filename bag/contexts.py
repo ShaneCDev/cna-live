@@ -112,7 +112,7 @@ def bag_contents(request):
                         discount = 130
 
             discount_amount += discount
-    delivery = total * Decimal(settings.STANDARD_DELIVERY_RATE / 100)
+    delivery = total * Decimal(settings.STANDARD_DELIVERY_PERCENTAGE / 100)
 
     print('Discount applied:', discount_applied)
 
