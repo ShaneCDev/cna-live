@@ -50,7 +50,7 @@
                 <div class="product-details-container mb-5 mt-md-5">
                     <p class="mb-0 text-dark">{{ product.name }}</p>
                     {% if discount_applied %}
-                    <p class="lead mb-0 text-start font-weight-bold text-dark"><strike>€{{ total }}</strike>|<span class="text-danger"> €{{ discounted_price }}</span></p>
+                    <p class="lead mb-0 text-start font-weight-bold text-dark"><strike>€{{ total }}</strike>|<span class="text-danger"> €{{ discounted_price|floatformat:2}}</span></p>
                     {% else %}
                     <p class="lead mb-0 text-start font-weight-bold text-dark">€{{ product.price }}</p>
                     {% endif %}

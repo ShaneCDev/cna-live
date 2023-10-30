@@ -26,6 +26,7 @@ class Product(models.Model):
     second_image = CloudinaryField('image', default='placeholder')
     third_image = CloudinaryField('image', default='placeholder')
     slug = models.SlugField(max_length=256, unique=True, null=False)
+    discount_applied = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name

@@ -25,6 +25,10 @@ body {
     height: 75%;
 }
 
+.hide {
+    display: none;
+}
+
 .tertiary-color {
     color: var(--tertiary-color);
 }
@@ -287,6 +291,9 @@ a {
 @media (max-width: 500px) {
     .btt-button {
         right: 1px;
+    }
+    .hide {
+        display: block;
     }
 }
 
