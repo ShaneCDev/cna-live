@@ -1,0 +1,36 @@
+<script type="text/javascript">
+    distillateDropdown = document.getElementById('dropdown-distillate');
+    
+    price = document.getElementById('new-price');
+    const originalHTML = price.innerHTML;
+
+    distillateDropdown.addEventListener('change', function() {
+        if (distillateDropdown.value == 5) {
+            priceHTML = `
+            <strike>€${fullPrice}</strike>|<span class="text-danger"> €119.99</span>
+            `;
+            price.innerHTML = priceHTML;
+        } else if (distillateDropdown.value == 10) {
+            fullPrice = pricePerUnit * 10;
+            priceHTML = `
+            <strike>€${fullPrice}</strike>|<span class="text-danger"> €249.99</span>
+            `;
+            price.innerHTML = priceHTML;
+        } else if (distillateDropdown.value == 25) {
+            fullPrice = pricePerUnit * 25;
+            priceHTML = `
+            <strike>€${fullPrice}</strike>|<span class="text-danger"> €549.99</span>
+            `;
+            price.innerHTML = priceHTML;
+        } else if (distillateDropdown.value == 50) {
+            fullPrice = pricePerUnit * 50;
+            priceHTML = `
+            <strike>€${fullPrice}</strike>|<span class="text-danger"> €1049.99</span>
+            `;
+            price.innerHTML = priceHTML;
+        } else if (distillateDropdown.value == 1) {
+            price.innerHTML = originalHTML;
+        }
+    });
+
+</script>

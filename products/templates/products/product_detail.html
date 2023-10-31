@@ -49,11 +49,7 @@
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="product-details-container mb-5 mt-md-5">
                     <p class="mb-0 text-dark">{{ product.name }}</p>
-                    {% if discount_applied %}
-                    <p class="lead mb-0 text-start font-weight-bold text-dark"><strike>€{{ total }}</strike>|<span class="text-danger"> €{{ discounted_price|floatformat:2}}</span></p>
-                    {% else %}
-                    <p class="lead mb-0 text-start font-weight-bold text-dark">€{{ product.price }}</p>
-                    {% endif %}
+                    <p class="lead mb-0 text-start font-weight-bold text-dark" id="new-price">€{{ product.price }}</p>
                     {% if product.category %}
                     <p class="small mt-1 mb-0">
                         <a href="{% url 'products' %}?category={{ product.category.name }}" class="text-muted">
@@ -80,7 +76,7 @@
                                 <div class="form-group w-50">
                                     <div class="input-group input-group-{{ product.id }}">
                                         {% if product.category.name == 'hhc-carts' %}
-                                        <select class="form-control id_qty_{{ product.id }}" name="quantity" data-item_id="{{ product.id }}">
+                                        <select class="form-control id_qty_{{ product.id }}" name="quantity" data-item_id="{{ product.id }}" id="dropdown-hhc">
                                             <option value="1">1 - €29.99</option>
                                             <option value="4">4 - €99.99</option>
                                             <option value="10">10 - €199.99</option>
@@ -88,41 +84,41 @@
                                             <option value="50">50 - €799.99</option>
                                         </select>
                                         {% elif product.category.name == 'hhc-disposables' %}
-                                        <select class="form-control id_qty_{{ product.id }}" name="quantity" data-item_id="{{ product.id }}">
-                                            <option value="1">1 - €40.00</option>
-                                            <option value="4">4 - €120.00</option>
-                                            <option value="10">10 - €250.00</option>
-                                            <option value="25">25 - €550.00</option>
-                                            <option value="50">50 - €1050.00</option>
+                                        <select class="form-control id_qty_{{ product.id }}" name="quantity" data-item_id="{{ product.id }}" id="dropdown-hhc-dispo">
+                                            <option value="1">1 - €39.99</option>
+                                            <option value="4">4 - €119.99</option>
+                                            <option value="10">10 - €249.99</option>
+                                            <option value="25">25 - €549.99</option>
+                                            <option value="50">50 - €1049.99</option>
                                         </select>
                                         {% elif product.category.name == 'concentrates-shatter' %}
-                                        <select class="form-control id_qty_{{ product.id }}" name="quantity" data-item_id="{{ product.id }}">
-                                            <option value="1">1g - €40.00</option>
-                                            <option value="4">4g - €120.00</option>
-                                            <option value="10">10g - €250.00</option>
-                                            <option value="25">25g - €550.00</option>
-                                            <option value="50">50g - €1050.00</option>
+                                        <select class="form-control id_qty_{{ product.id }}" name="quantity" data-item_id="{{ product.id }}" id="dropdown-shatter">
+                                            <option value="1">1g - €39.99</option>
+                                            <option value="4">4g - €119.99</option>
+                                            <option value="10">10g - €249.99</option>
+                                            <option value="25">25g - €549.99</option>
+                                            <option value="50">50g - €1049.99</option>
                                         </select>
                                         {% elif product.category.name == 'concentrates-distillate' %}
-                                        <select class="form-control id_qty_{{ product.id }}" name="quantity" data-item_id="{{ product.id }}">
-                                            <option value="1">25ml - €250.00</option>
-                                            <option value="5">50ml - €450.00</option>
-                                            <option value="10">100ml - €750.00</option>
-                                            <option value="25">250ml - €1400.00</option>
-                                            <option value="50">500ml - €2500.00</option>
-                                            <option value="1000">1000ml - €4500.00</option>
+                                        <select class="form-control id_qty_{{ product.id }}" name="quantity" data-item_id="{{ product.id }}" id="dropdown-distillate">
+                                            <option value="1">25ml - €249.99</option>
+                                            <option value="2">50ml - €449.99</option>
+                                            <option value="4">100ml - €749.99</option>
+                                            <option value="10">250ml - €1399.99</option>
+                                            <option value="20">500ml - €2499.99</option>
+                                            <option value="40">1000ml - €4499.99</option>
                                         </select>
                                         {% elif product.category.name == 'hhc-o-carts' %}
-                                        <select class="form-control id_qty_{{ product.id }}" name="quantity" data-item_id="{{ product.id }}">
-                                            <option value="1">1 - €25.00</option>
-                                            <option value="5">5 - €100.00</option>
-                                            <option value="10">10 - €180.00</option>
+                                        <select class="form-control id_qty_{{ product.id }}" name="quantity" data-item_id="{{ product.id }}" id="dropdown-hhco-carts">
+                                            <option value="1">1 - €24.99</option>
+                                            <option value="5">5 - €99.99</option>
+                                            <option value="10">10 - €179.99</option>
                                         </select>
                                         {% elif product.category.name == 'hhc-o-disposables' %}
-                                        <select class="form-control id_qty_{{ product.id }}" name="quantity" data-item_id="{{ product.id }}">
-                                            <option value="1">1 - €35.00</option>
-                                            <option value="5">5 - €120.00</option>
-                                            <option value="10">10 - €220.00</option>
+                                        <select class="form-control id_qty_{{ product.id }}" name="quantity" data-item_id="{{ product.id }}" id="dropdown-hhco-dispo">
+                                            <option value="1">1 - €34.99</option>
+                                            <option value="5">5 - €119.99</option>
+                                            <option value="10">10 - €219.99</option>
                                         </select>
                                         {% else %}
                                         <div class="form-group w-50">
@@ -172,4 +168,17 @@
 {% block postloadjs %}
 {{ block.super }}
 {% include 'products/includes/quantity_input_script.html' %}
+{% if product.category.name == 'hhc-carts' %}
+    {% include 'products/includes/hhc_carts_dropdown_script.html' %}
+{% elif product.category.name == 'hhc-disposables' %}
+    {% include 'products/includes/hhc_dispo_dropdown_script.html' %}
+{% elif product.category.name == 'concentrates-shatter' %}
+    {% include 'products/includes/shatter_dropdown_script.html' %}
+{% elif product.category.name == 'concentrates-distillate' %}
+    {% include 'products/includes/distillate_dropdown_script.html' %}
+{% elif product.category.name == 'hhc-o-carts' %}
+    {% include 'products/includes/hhco_carts_dropdown_script.html' %}
+{% elif product.category.name == 'hhc-o-disposables' %}
+    {% include 'products/includes/hhco_dispo_dropdown_script.html' %}
+{% endif %}
 {% endblock %}

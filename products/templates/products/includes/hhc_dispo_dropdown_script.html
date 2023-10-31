@@ -1,0 +1,43 @@
+<script type="text/javascript">
+    hhcDisposablesDropdown = document.getElementById('dropdown-hhc-dispo');
+
+    price = document.getElementById('new-price');
+    const originalHTML = price.innerHTML;
+    
+    pricePerUnit = 39.99;
+
+    hhcDisposablesDropdown.addEventListener('change', function() {
+        if (hhcDisposablesDropdown.value == 4) {
+            fullPrice = pricePerUnit * 4;
+            fullPrice = fullPrice.toFixed(2);
+            priceHTML = `
+            <strike>€${fullPrice}</strike>|<span class="text-danger"> €119.99</span>
+            `;
+            price.innerHTML = priceHTML;
+        } else if (hhcDisposablesDropdown.value == 10) {
+            fullPrice = pricePerUnit * 10;
+            fullPrice = fullPrice.toFixed(2);
+            priceHTML = `
+            <strike>€${fullPrice}</strike>|<span class="text-danger"> €249.99</span>
+            `;
+            price.innerHTML = priceHTML;
+        } else if (hhcDisposablesDropdown.value == 25) {
+            fullPrice = pricePerUnit * 25;
+            fullPrice = fullPrice.toFixed(2);
+            priceHTML = `
+            <strike>€${fullPrice}</strike>|<span class="text-danger"> €549.99</span>
+            `;
+            price.innerHTML = priceHTML;
+        } else if (hhcDisposablesDropdown.value == 50) {
+            fullPrice = pricePerUnit * 50;
+            fullPrice = fullPrice.toFixed(2);
+            priceHTML = `
+            <strike>€${fullPrice}</strike>|<span class="text-danger"> €1049.99</span>
+            `;
+            price.innerHTML = priceHTML;
+        } else if (hhcDisposablesDropdown.value == 1) {
+            price.innerHTML = originalHTML;
+        }
+    });
+
+</script>

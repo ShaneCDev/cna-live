@@ -1,0 +1,29 @@
+<script type="text/javascript">
+    hhcoCartsDropdown = document.getElementById('dropdown-hhco-carts');
+    
+    price = document.getElementById('new-price');
+    const originalHTML = price.innerHTML;
+
+    pricePerUnit = 34.99;
+
+    hhcoCartsDropdown.addEventListener('change', function() {
+        if (hhcoCartsDropdown.value == 1) {
+            price.innerText = originalHTML;
+        }
+        else if (hhcoCartsDropdown.value == 5) {
+            fullPrice = pricePerUnit * 5;
+            fullPrice = fullPrice.toFixed(2);
+            priceHTML = `
+            <strike>€${fullPrice}</strike>|<span class="text-danger"> €119.99</span>
+            `;
+            price.innerHTML = priceHTML;
+        } else if (hhcoCartsDropdown.value == 10) {
+            fullPrice = pricePerUnit * 10;
+            fullPrice = fullPrice.toFixed(2);
+            priceHTML = `
+            <strike>€${fullPrice}</strike>|<span class="text-danger"> €219.99</span>
+            `;
+            price.innerHTML = priceHTML;
+        }
+    });
+</script>

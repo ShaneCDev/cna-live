@@ -97,44 +97,44 @@
                                 {% elif item.product.category.name == 'hhc-disposables' %}
                                 <select class="form-control id_qty_{{ product.id }}" name="quantity"
                                     data-item_id="{{ product.id }}">
-                                    <option value="1">1 - €40.00</option>
-                                    <option value="4">4 - €120.00</option>
-                                    <option value="10">10 - €250.00</option>
-                                    <option value="25">25 - €550.00</option>
-                                    <option value="50">50 - €1050.00</option>
+                                    <option value="1">1 - €39.99</option>
+                                    <option value="4">4 - €119.99</option>
+                                    <option value="10">10 - €249.99</option>
+                                    <option value="25">25 - €549.99</option>
+                                    <option value="50">50 - €1049.99</option>
                                 </select>
                                 {% elif item.product.category.name == 'concentrates-shatter' %}
                                 <select class="form-control id_qty_{{ product.id }}" name="quantity"
                                     data-item_id="{{ product.id }}">
-                                    <option value="1">1g - €40.00</option>
-                                    <option value="4">4g - €120.00</option>
-                                    <option value="10">10g - €250.00</option>
-                                    <option value="25">25g - €550.00</option>
-                                    <option value="50">50g - €1050.00</option>
+                                    <option value="1">1g - €39.99</option>
+                                    <option value="4">4g - €119.99</option>
+                                    <option value="10">10g - €249.99</option>
+                                    <option value="25">25g - €549.99</option>
+                                    <option value="50">50g - €1049.99</option>
                                 </select>
                                 {% elif item.product.category.name == 'concentrates-distillate' %}
                                 <select class="form-control id_qty_{{ product.id }}" name="quantity"
                                     data-item_id="{{ product.id }}">
-                                    <option value="1">25ml - €250.00</option>
-                                    <option value="5">50ml - €450.00</option>
-                                    <option value="10">100ml - €750.00</option>
-                                    <option value="25">250ml - €1400.00</option>
-                                    <option value="50">500ml - €2500.00</option>
-                                    <option value="1000">1000ml - €4500.00</option>
+                                    <option value="1">25ml - €249.99</option>
+                                    <option value="2">50ml - €449.99</option>
+                                    <option value="4">100ml - €749.99</option>
+                                    <option value="10">250ml - €1399.99</option>
+                                    <option value="20">500ml - €2499.99</option>
+                                    <option value="40">1000ml - €4499.99</option>
                                 </select>
                                 {% elif item.product.category.name == 'hhc-o-carts' %}
                                 <select class="form-control id_qty_{{ product.id }}" name="quantity"
                                     data-item_id="{{ product.id }}">
-                                    <option value="1">1 - €25.00</option>
-                                    <option value="5">5 - €100.00</option>
-                                    <option value="10">10 - €180.00</option>
+                                    <option value="1">1 - €24.99</option>
+                                    <option value="5">5 - €99.99</option>
+                                    <option value="10">10 - €179.99</option>
                                 </select>
                                 {% elif item.product.category.name == 'hhc-o-disposables' %}
                                 <select class="form-control id_qty_{{ product.id }}" name="quantity"
                                     data-item_id="{{ product.id }}">
-                                    <option value="1">1 - €35.00</option>
-                                    <option value="5">5 - €120.00</option>
-                                    <option value="10">10 - €220.00</option>
+                                    <option value="1">1 - €34.99</option>
+                                    <option value="5">5 - €119.99</option>
+                                    <option value="10">10 - €219.99</option>
                                 </select>
                                 {% else %}
                                 <div class="form-group w-50">
@@ -174,7 +174,11 @@
                     {% endfor %}
                     <tr>
                         <td colspan="5" class="pt-5 text-end">
+                            {% if discount_applied %}
+                            <h6><strong>Bag Total: €{{ discounted_price|floatformat:2 }}</strong></h6>
+                            {% else %}
                             <h6><strong>Bag Total: €{{ total|floatformat:2 }}</strong></h6>
+                            {% endif %}
                             <h6>Delivery: €{{ delivery|floatformat:2 }}</h6>
                             <h4 class="mt-4"><strong>Grand Total: €{{ grand_total|floatformat:2 }}</strong></h4>
                         </td>

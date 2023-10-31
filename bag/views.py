@@ -5,7 +5,6 @@ from products.models import Product
 
 def view_bag(request):
     """View that renders the bag contents page"""
-    print(request)
     return render(request, 'bag/bag.html')
 
 

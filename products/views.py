@@ -63,9 +63,7 @@ def product_detail(request, slug):
     """Detailed view of the product"""
     product = get_object_or_404(Product, slug=slug)
     paragraphs = linebreaksbr(product.description).split('<br>')
-    print(product)
-    
-    print(request)
+
     paragraphs = [p.strip() for p in paragraphs if p.strip()]
 
     image_urls = [product.image.url, product.second_image.url, product.third_image.url]
