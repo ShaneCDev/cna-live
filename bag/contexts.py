@@ -66,19 +66,19 @@ def bag_contents(request):
                 case 'concentrates-distillate':
                     if item_data == 2:
                         discount_applied = True
-                        discount = 49.99
+                        discount = 99.99
                     elif item_data == 4:
                         discount_applied = True
-                        discount = 249.97
+                        discount = 299.97
                     elif item_data == 10:
                         discount_applied = True
-                        discount = 1099.91
+                        discount = 1399.91
                     elif item_data == 20:
                         discount_applied = True
-                        discount = 2499.81
+                        discount = 2999.81
                     elif item_data == 40:
                         discount_applied = True
-                        discount_amount = 5499.61
+                        discount_amount = 6999.61
                 case 'hhc-o-carts':
                     if item_data == 5:
                         discount_applied = True
