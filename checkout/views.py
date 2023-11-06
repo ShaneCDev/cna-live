@@ -156,12 +156,12 @@ def checkout_success(request, order_number):
         [cust_email]
     )
 
-    print(send_mail(
+    send_mail(
         subject,
         body,
         settings.DEFAULT_FROM_EMAIL,
-        [cust_email]
-    ))
+        [settings.DEFAULT_FROM_EMAIL]
+    )
 
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)
