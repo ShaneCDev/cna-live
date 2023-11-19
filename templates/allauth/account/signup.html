@@ -13,12 +13,28 @@
 
 <form class="signup mb-2" id="signup_form" method="post" action="{% url 'account_signup' %}">
   {% csrf_token %}
-  {{ form|crispy }}
+  {{ form.email|as_crispy_field }}
+  {{ form.email2|as_crispy_field }}
+  {{ form.username|as_crispy_field }}
+  {{ form.password1|as_crispy_field }}
+  {{ form.password2|as_crispy_field }}
+
+  {% if form.errors %}
+    {% for field in form %}
+      {% if field.name != 'captcha' %}
+        {{ field.errors }}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
+  {{ form.captcha }}
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %}
-  <a href="{% url 'account_login' %}" class="btn btn-outline-dark rounded-0">Back to Login</a>
-  <button type="submit">{% trans "Sign Up" %} &raquo;</button>
+  <div class="mt-2">
+    <a href="{% url 'account_login' %}" class="btn btn-outline-dark rounded-0">Back to Login</a>
+    <button type="submit">{% trans "Sign Up" %} &raquo;</button>
+  </div>
 </form>
 
 {% endblock %}

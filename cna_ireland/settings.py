@@ -14,6 +14,7 @@ from pathlib import Path
 import mimetypes
 import os
 import dj_database_url
+import django_recaptcha
 if os.path.isfile('env.py'):
     import env
 
@@ -62,6 +63,7 @@ INSTALLED_APPS = [
     'blog',
     'why',
     'contact',
+    'django_recaptcha',
 
     'crispy_forms',
     'crispy_bootstrap5',
@@ -133,9 +135,16 @@ ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 ACCOUNT_USERNAME_MIN_LENGTH = 8
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
+ACCOUNT_SIGNUP_FORM_CLASS = 'cna_ireland.forms.MyCustomSignupForm'
 
 WSGI_APPLICATION = 'cna_ireland.wsgi.application'
 
+# Google Recaptcha
+RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY')
+RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY')
+NOCAPTCHA = True
+SILENCED_SYSTEM_CHECKS = ['django_recaptcha.recaptcha_test_key_error']
+RECAPTCHA_REQUIRED_SCORE = 0.85
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
